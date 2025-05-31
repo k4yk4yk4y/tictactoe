@@ -3,7 +3,7 @@
 require_relative './board'
 
 class Player # rubocop:disable Style/Documentation
-  attr_accessor :sign
+  attr_accessor :sign, :name
 
   def initialize(name, board)
     @name = name
@@ -24,9 +24,9 @@ class Player # rubocop:disable Style/Documentation
 
   def make_move
     print "Введите номер строки: " # rubocop:disable Style/StringLiterals
-    line = gets.to_i
+    line = gets.to_i - 1
     print "Введите номер столбца: " # rubocop:disable Style/StringLiterals
-    column = gets.to_i
+    column = gets.to_i - 1
     @board.board[line][column] = @sign
   end
 end

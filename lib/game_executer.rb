@@ -19,14 +19,14 @@ class TicTacToe
 
   def game_over?
     @board.board.each do |row|
-      return @can_play = false if row.uniq.size == 1 && row.first != nil # rubocop:disable Style/NonNilCheck
+      return @can_play = false if row.uniq.size == 1 && row.first != '-'
     end
     (0..2).each do |col|
-      return @can_play = false if @board.board.map { |row| row[col] }.uniq.size == 1 && @board.board[0][col] != nil # rubocop:disable Style/NonNilCheck
+      return @can_play = false if @board.board.map { |row| row[col] }.uniq.size == 1 && @board.board[0][col] != '-'
     end
-    return @can_play = false if [@board.board[0][0], @board.board[1][1], @board.board[2][2]].uniq.size == 1 && @board.board[0][0] != nil # rubocop:disable Style/NonNilCheck,Layout/LineLength
-    return @can_play = false if [@board.board[0][2], @board.board[1][1], @board.board[2][0]].uniq.size == 1 && @board.board[0][2] != nil # rubocop:disable Layout/EmptyLineAfterGuardClause,Layout/LineLength,Style/NonNilCheck
-    continue_game if @can_play == true
+    return @can_play = false if [@board.board[0][0], @board.board[1][1], @board.board[2][2]].uniq.size == 1 && @board.board[0][0] != '-' # rubocop:disable Layout/LineLength
+    return @can_play = false if [@board.board[0][2], @board.board[1][1], @board.board[2][0]].uniq.size == 1 && @board.board[0][2] != '-' # rubocop:disable Layout/LineLength,Style/RedundantReturn
+    # continue_game if @can_play == true
   end
 
   # def draw?
@@ -36,7 +36,14 @@ class TicTacToe
 
   def continue_game
     while @can_play == true
+      @board.show_board
+      puts "Игрок #{@player1.name} ваш ход"
       @player1.make_move
+      @board.show_board
+      game_over?
+      break if @can_play == false
+
+      puts "Игрок #{@player2.name} ваш ход"
       @player2.make_move
       @board.show_board
       game_over?
