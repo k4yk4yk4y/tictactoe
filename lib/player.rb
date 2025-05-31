@@ -13,7 +13,7 @@ class Player # rubocop:disable Style/Documentation
 
   def choose_sign
     print "Выберите знак x или o: " # rubocop:disable Style/StringLiterals
-    sign = gets.chomp
+    @sign = gets.chomp
     if %w[o x].include?(sign)
       @sign = sign
     else
