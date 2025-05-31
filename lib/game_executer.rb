@@ -8,7 +8,7 @@ class TicTacToe
     @can_play = true
     @board = Board.new
     @player1 = Player.new('Paul', @board)
-    @player2 = Player.new('Computer', @board)
+    @player2 = Player.new('Alina Chipolinooo', @board)
     @player1.choose_sign
     @player2.sign = 'o' if @player1.sign == 'x'
     @player2.sign = 'x' if @player1.sign == 'o'
@@ -41,12 +41,19 @@ class TicTacToe
       @player1.make_move
       @board.show_board
       game_over?
-      break if @can_play == false
+      if @can_play == false
+        puts "Победил #{@player1.name}"
+        break
+      end
 
       puts "Игрок #{@player2.name} ваш ход"
       @player2.make_move
       @board.show_board
       game_over?
+      if @can_play == false
+        puts "Победил #{@player2.name}"
+        break
+      end
       # draw?
     end
   end
